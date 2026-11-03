@@ -8,3 +8,5 @@ numpy==2.3.5
 SQLAlchemy
 psycopg[binary]
 prometheus-fastapi-instrumentator
+pytest
+httpx
