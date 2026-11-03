@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+scikit-learn==1.8.0
+xgboost==3.3.0
+pandas==2.3.3
+joblib==1.5.2
+numpy==2.3.5
+SQLAlchemy
+psycopg[binary]
+prometheus-fastapi-instrumentator

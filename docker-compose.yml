@@ -1,0 +1,53 @@
+services:
+
+  api:
+    build: .
+    container_name: credit-api
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - db
+
+    environment:
+      DATABASE_URL: postgresql+psycopg://credit_user:credit_password@db:5432/credit_db
+
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    container_name: credit-db
+
+    environment:
+      POSTGRES_USER: credit_user
+      POSTGRES_PASSWORD: credit_password
+      POSTGRES_DB: credit_db
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    restart: unless-stopped
+  prometheus:
+      image: prom/prometheus
+      ports:
+        - "9090:9090"
+      volumes:
+        - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      depends_on:
+        - api
+      restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
