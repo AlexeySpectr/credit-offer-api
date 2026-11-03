@@ -44,5 +44,5 @@ jobs:
           context: .
           push: true
           tags: |
-            alexeyspectr/credit-offer-api:latest
-            alexeyspectr/credit-offer-api:${{ github.sha }}
+            ${{ secrets.NAME }}/credit-offer-api:latest
+            ${{ secrets.NAME }}/credit-offer-api:${{ github.sha }}
